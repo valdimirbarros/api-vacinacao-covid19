@@ -14,5 +14,8 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return 'Api Vacinação COVID19 - Versão 1.0'; 
 });
+
+
+//VACINA
