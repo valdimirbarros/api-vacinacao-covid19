@@ -13,9 +13,16 @@
 |
 */
 
+//HOME
 $router->get('/', function () use ($router) {
-    return 'Api Vacinação COVID19 - Versão 1.0'; 
+    return response()->json([
+        'data' =>
+        ['message' => 'Api Vacinação COVID19 - Versão 1.0']
+    ]);
 });
 
-
-//VACINA
+//VACINAS
+$router->group(['prefix' => 'vacinas'], function () use ($router) {
+    $router->get('/', 'VaccineController@index');
+    $router->post('/cadastrar', 'VaccineController@store');
+});

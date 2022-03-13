@@ -11,4 +11,5 @@ class Vaccine extends Model
 
     protected $table = 'vaccine';
 
+    protected $fillabe = ['name', 'doses', 'batch_number'];
 }

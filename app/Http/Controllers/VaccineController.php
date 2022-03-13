@@ -14,7 +14,10 @@ class VaccineController extends Controller
      */
     public function index()
     {
-        //
+        //Vacinas cadastrada
+        return response()->json([
+            'data' => Vaccine::all()
+        ]);
     }
 
     /**
@@ -35,7 +38,8 @@ class VaccineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Vaccine::create($request->all());
+        
     }
 
     /**
