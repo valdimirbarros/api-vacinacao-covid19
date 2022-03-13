@@ -56,8 +56,6 @@ class VaccineController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Vaccine  $vaccine
      * @return \Illuminate\Http\Response
      */
     public function show($vaccine)
@@ -65,20 +63,18 @@ class VaccineController extends Controller
         try {
             return response()->json([
                 'data' =>
-                ['message' => Vaccine::find($vaccine)]
+                ['message' => Vaccine::findOrFail($vaccine)]
             ]);
         } catch (Exception $e) {
             return response()->json([
                 'data' =>
-                ['message' => 'Erro ao cadastrar registro!']
+                ['message' => 'Erro ao visualizar registro!']
             ]);
         }
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Vaccine  $vaccine
      * @return \Illuminate\Http\Response
      */
     public function edit(Vaccine $vaccine)
@@ -89,11 +85,10 @@ class VaccineController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Vaccine  $vaccine
+     * @param  \Illuminate\Http\Request  $req
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vaccine $vaccine)
+    public function update($vaccine, Request $request)
     {
         try {
 
@@ -115,12 +110,25 @@ class VaccineController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Vaccine  $vaccine
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vaccine $vaccine)
+    public function destroy($vaccine)
     {
-        //
+        try {
+
+            $vaccine = Vaccine::find($vaccine);
+
+            $vaccine->delete();
+
+            return response()->json([
+                'data' =>
+                ['message' => 'Registro excluído com sucesso!']
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'data' =>
+                ['message' => 'Erro ao excluir registro!']
+            ]);
+        }
     }
 }

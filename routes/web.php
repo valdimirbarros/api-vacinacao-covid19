@@ -27,7 +27,7 @@ $router->group(['prefix' => 'vacinas'], function () use ($router) {
     $router->get('/{vaccine}', 'VaccineController@show'); //vizualizar vacina
     $router->post('/', 'VaccineController@store'); //cadastrar vacina
     $router->put('/{vaccine}', 'VaccineController@update'); //atualizar vacina
-    $router->delete('/', 'VaccineController@destroy'); //excluir vacina
+    $router->delete('/{vaccine}', 'VaccineController@destroy'); //excluir vacina
 });
 
 //APLICADORES
@@ -39,6 +39,15 @@ $router->group(['prefix' => 'applicator'], function () use ($router) {
     $router->delete('/{applicator}', 'ApplicatorController@destroy'); //excluir aplicador
 });
 
+//LOTES DE VACINA (NÃO IMPLEMENTADO)
+$router->group(['prefix' => 'VaccineBatch'], function () use ($router) {
+    $router->get('/', 'VaccineBatchController@index'); //visualizar lotes de vacina cadastrados
+    $router->get('/{vaccineBatch}', 'VaccineBatchController@show'); //vizualizar lote de vacina
+    $router->post('/', 'VaccineBatchController@store'); //cadastrar lote de vacina
+    $router->put('/{vaccineBatch}', 'VaccineBatchController@update'); //atualizar lote de vacina
+    $router->delete('/{vaccineBatch}', 'VaccineBatchController@destroy'); //excluir lote de vacina
+});
+
 //APLICAÇÕES (NÃO IMPLEMENTADO)
 $router->group(['prefix' => 'application'], function () use ($router) {
     $router->get('/', 'ApplicationController@index'); //visualizar aplicações cadastrados
@@ -47,3 +56,5 @@ $router->group(['prefix' => 'application'], function () use ($router) {
     $router->put('/{application}', 'ApplicationController@update'); //atualizar aplicação
     $router->delete('/{application}', 'ApplicationController@destroy'); //excluir aplicação
 });
+
+
