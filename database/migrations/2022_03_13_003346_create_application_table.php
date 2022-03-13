@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('application', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->int('vaccine_id');
-            $table->int('applicator_id');
+            $table->integer('vaccine_id');
+            $table->integer('applicator_id');
             $table->string('person_name');
             $table->string('person_cpf');
             $table->date('person_birth_date');

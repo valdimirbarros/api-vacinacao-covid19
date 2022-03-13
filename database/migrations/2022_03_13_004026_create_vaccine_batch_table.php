@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('vaccine_batch', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->int('doses');
+            $table->integer('doses');
             $table->string('batch_number');
             $table->timestamps();
         });
