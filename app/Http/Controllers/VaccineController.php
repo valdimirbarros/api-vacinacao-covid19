@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vaccine;
 use Illuminate\Http\Request;
+use Exception;
 
 class VaccineController extends Controller
 {
@@ -14,7 +15,6 @@ class VaccineController extends Controller
      */
     public function index()
     {
-        //Vacinas cadastrada
         return response()->json([
             'data' => Vaccine::all()
         ]);
@@ -38,8 +38,20 @@ class VaccineController extends Controller
      */
     public function store(Request $request)
     {
-        Vaccine::create($request->all());
-        
+
+        try {
+            Vaccine::create($request->all());
+            return response()->json([
+                'data' =>
+                ['message' => 'Registro criado com sucesso!']
+            ]);
+        } catch (Exception $e) {
+
+            return response()->json([
+                'data' =>
+                ['message' => 'Erro ao cadastrar registro!']
+            ]);
+        }
     }
 
     /**
@@ -48,9 +60,19 @@ class VaccineController extends Controller
      * @param  \App\Models\Vaccine  $vaccine
      * @return \Illuminate\Http\Response
      */
-    public function show(Vaccine $vaccine)
+    public function show($vaccine)
     {
-        //
+        try {
+            return response()->json([
+                'data' =>
+                ['message' => Vaccine::find($vaccine)]
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'data' =>
+                ['message' => 'Erro ao cadastrar registro!']
+            ]);
+        }
     }
 
     /**
@@ -73,7 +95,22 @@ class VaccineController extends Controller
      */
     public function update(Request $request, Vaccine $vaccine)
     {
-        //
+        try {
+
+            $vaccine = Vaccine::find($vaccine);
+
+            $vaccine->update($request->all());
+
+            return response()->json([
+                'data' =>
+                ['message' => 'Registro atualizado com sucesso!']
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'data' =>
+                ['message' => 'Erro ao atualizar registro!']
+            ]);
+        }
     }
 
     /**
