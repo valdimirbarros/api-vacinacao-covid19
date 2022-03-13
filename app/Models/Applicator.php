@@ -9,4 +9,6 @@ class Applicator extends Model
 {
     use HasFactory;
     protected $table = 'applicator';
+    protected $fillable = ['name', 'cpf', 'coren'];
+
 }

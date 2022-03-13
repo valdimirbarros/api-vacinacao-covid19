@@ -41,7 +41,6 @@ class VaccineController extends Controller
 
         try {
             Vaccine::create($request->all());
-            return $request->all();
 
             return response()->json([
                 'data' =>
