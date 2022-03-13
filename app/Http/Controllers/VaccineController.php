@@ -41,6 +41,8 @@ class VaccineController extends Controller
 
         try {
             Vaccine::create($request->all());
+            return $request->all();
+
             return response()->json([
                 'data' =>
                 ['message' => 'Registro criado com sucesso!']
@@ -85,7 +87,7 @@ class VaccineController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $req
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function update($vaccine, Request $request)
@@ -95,7 +97,7 @@ class VaccineController extends Controller
             $vaccine = Vaccine::find($vaccine);
 
             $vaccine->update($request->all());
-
+            
             return response()->json([
                 'data' =>
                 ['message' => 'Registro atualizado com sucesso!']
